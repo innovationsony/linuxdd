@@ -1,0 +1,92 @@
+new
+
+
+medium
+--------------------
+connection less --wifi
+connection        tftp
+
+via tftp ---we have to establish a connection b/w 2 systems
+
+configure etho
+the first three  fiels of the systems which are used as sockets should be same
+the fourth field is acts as device id (specific to system)
+
+------------
+sockets---------
+       - named sockets
+       - unnamed sockets
+
+usage protocol of sockets --
+			tcp --
+			udp --
+
+
+order
+	socket
+	bind
+	listen
+	accept
+	send
+	receive
+--------------------------------------------
+
+socket--
+       int socket(int domain, int type, int protocol);
+
+        domain--AFINET or AF LOCAL AFUNIX
+	type  --SOCKSTREEAM,SOCKDATAGRAM
+	protocol -0
+   valids for socket
+	if domain =AF_INET then domains should be (TO OPEN)  && protocols 
+					SOCK_STREAM---tcp        0 or IPPROTO_TCP 
+					SOCK_DGRAM----udp        0 or IPPROTO_UDP
+					SOCK_RAW------raw        IANA IP:
+
+
+
+SOCK_STREAM, for a stream-oriented socket and SOCK_DGRAM
+       unix_socket = socket(AF_UNIX, type, 0);
+	type--
+		SOCK_SEQPACKET
+		SOCK_DGRAM
+		SOCK_SEQPACKET
+#define UNIX_PATH_MAX    108
+
+           struct sockaddr_un {
+               sa_family_t sun_family;               /* AF_UNIX */
+               char        sun_path[UNIX_PATH_MAX];  /* pathname */
+           };
+
+
+returns  	fdsocket
+  err   -1
+
+bind--
+
+int bind(int sockfd, const struct sockaddr *addr,socklen_t addrlen);
+ struct sockaddr {
+               sa_family_t sa_family;
+               char        sa_data[14];
+           }
+
+return =0
+err   =-1
+
+
+
+listen--
+
+int listen(int sockfd, int backlog);
+return =0
+err    =-1
+
+accept--
+
+
+int accept(int sockfd, struct sockaddr *addr, socklen_t *addrlen);
+retrun = greater than 0
+err    =-1
+
+
+
