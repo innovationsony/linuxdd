@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<sys/socket.h>
- #include <netinet/ip.h>
+#include <netinet/ip.h>
 
 main(){
 int sfd=0;int cfd=0;
@@ -23,13 +23,11 @@ if((sfd=socket(AF_INET,SOCK_STREAM,0))<0){
 	m.sin_port=htons(3000);
 	m.sin_addr.s_addr=htonl(INADDR_ANY);
 
-if(bind(sfd, (struct sockaddr *) &m,sizeof(m))<0)
+if(bind(sfd,(struct sockaddr *) &m,sizeof(m))<0)
 	{ perror("bind_error "); }
 
 if(listen(sfd,2)<0)
 	{	perror("socket listen");}
-
-
 
  if((cfd=accept(sfd, (struct sockaddr *)&cl_addr, &cl_len))<0)
 	{ perror("accept_error "); }
@@ -38,6 +36,4 @@ if(listen(sfd,2)<0)
 	write(cfd,buffer,10);
 	read(cfd,cl_buffer,sizeof(cl_buffer));
 	write(1,cl_buffer,19);
-	
-
 }
